@@ -6,12 +6,24 @@ import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
 
+// import org.json.JSONArray;
+// import org.json.JSONException;
+// import org.json.JSONObject;
+// import android.util.Patterns;
+
+import java.util.HashMap;
+import java.util.Map;
+
+// import android.app.Activity;
+// import android.content.Intent;
+// import android.util.Log;
+// import android.net.Uri;
+
 /**
  * FlutterRavepayPlugin
  */
 public class FlutterRavepayPlugin implements MethodCallHandler {
   public static final String TAG = "FlutterRavePayPlugin";
-  private Map chargeOptions;
 
   /**
    * Plugin registration.
