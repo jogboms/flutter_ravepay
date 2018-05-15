@@ -6,3 +6,8 @@
 pubspec.lock
 
 build/
+/.idea/workspace.xml
+/.idea/libraries
+
+ios/.generated/
+packages

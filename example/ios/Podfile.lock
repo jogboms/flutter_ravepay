@@ -1,0 +1,22 @@
+PODS:
+  - Flutter (1.0.0)
+  - flutter_ravepay (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Pods/.symlinks/flutter/ios`)
+  - flutter_ravepay (from `Pods/.symlinks/plugins/flutter_ravepay/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Pods/.symlinks/flutter/ios
+  flutter_ravepay:
+    :path: Pods/.symlinks/plugins/flutter_ravepay/ios
+
+SPEC CHECKSUMS:
+  Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
+  flutter_ravepay: 1ab22e324f1db44a2d8a8eb27bf10496bb87d531
+
+PODFILE CHECKSUM: ea0518673586564c605fb6593d385c0e3708ff8d
+
+COCOAPODS: 1.3.1

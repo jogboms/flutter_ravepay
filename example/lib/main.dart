@@ -10,28 +10,16 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Map<String, dynamic> _result;
+  FlutterRavepayResult _result;
 
-  @override
-  initState() {
-    super.initState();
-    initPlatformState();
-  }
+  chargeCard() async {
+    FlutterRavepayResult result;
 
-  // Platform messages are asynchronous, so we initialize in an async method.
-  initPlatformState() async {
-    Map<String, dynamic> result;
-    // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       result = await FlutterRavepay.chargeCard({"test": "card"});
     } on PlatformException {
-      result = {"message": 'Failed to get platform version.'};
+      result = new FlutterRavepayResult({"message": 'Failed to get platform version.'});
     }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
 
     setState(() {
       _result = result;
@@ -46,7 +34,18 @@ class _MyAppState extends State<MyApp> {
           title: new Text('Flutter Ravepay'),
         ),
         body: new Center(
-          child: new Text('Working?: ${_result['message']}\n'),
+          child: new Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              new RaisedButton(
+                color: Colors.green,
+                onPressed: () => chargeCard(),
+                child: new Text("TEST"),
+              ),
+              SizedBox(height: 16.0,),
+              new Text('Working?: ${_result?.toMap()}\n'),
+            ],
+          ),
         ),
       ),
     );
