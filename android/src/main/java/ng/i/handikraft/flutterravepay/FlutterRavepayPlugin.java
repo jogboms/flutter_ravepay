@@ -27,9 +27,8 @@ import com.flutterwave.raveandroid.RaveConstants;
 /**
  * FlutterRavepayPlugin
  */
-// public class FlutterRavepayPlugin implements
-// PluginRegistry.ActivityResultListener, MethodCallHandler {
-public class FlutterRavepayPlugin implements MethodCallHandler {
+public class FlutterRavepayPlugin implements PluginRegistry.ActivityResultListener, MethodCallHandler {
+  // public class FlutterRavepayPlugin implements MethodCallHandler {
   public static final String TAG = "FlutterRavepayPlugin";
   private static final String CHANNEL_NAME = "ng.i.handikraft/flutter_ravepay";
   private static final String METHOD_CHARGE_CARD = "chargeCard";
@@ -38,11 +37,11 @@ public class FlutterRavepayPlugin implements MethodCallHandler {
   private Result pendingResult;
 
   private RavePayManager ravepayManager;
+  private Map<String, Object> chargeParams;
 
   private FlutterRavepayPlugin(Registrar registrar) {
     this.registrar = registrar;
     initialize();
-    // chargeCard();
   }
 
   /**
@@ -61,12 +60,9 @@ public class FlutterRavepayPlugin implements MethodCallHandler {
       if (!(call.arguments instanceof Map)) {
         throw new IllegalArgumentException("Plugin not passing a map as parameter: " + call.arguments);
       }
-      Map chargeParams = (Map<String, Object>) call.arguments;
+      chargeParams = (Map<String, Object>) call.arguments;
       setPendingResult(call.method, result);
       chargeCard();
-      // final HashMap<String, Object> res = new HashMap<String, Object>();
-      // res.put("message", "SUCCESS ");
-      // finishWithResult(res);
     } else {
       result.notImplemented();
     }
@@ -80,7 +76,7 @@ public class FlutterRavepayPlugin implements MethodCallHandler {
     pendingResult = result;
   }
 
-  private void finishWithResult(Object result) {
+  private void finishWithResult(HashMap<String, Object> result) {
     if (pendingResult != null) {
       pendingResult.success(result);
       pendingResult = null;
@@ -89,21 +85,23 @@ public class FlutterRavepayPlugin implements MethodCallHandler {
 
   @Override
   public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
-    Log.d(TAG, "Result " + requestCode);
+    Log.d(TAG, "Result " + data);
     final HashMap<String, Object> res = new HashMap<String, Object>();
     if (requestCode == RaveConstants.RAVE_REQUEST_CODE && data != null) {
       String message = data.getStringExtra("response");
       if (resultCode == RavePayActivity.RESULT_SUCCESS) {
         Log.d(TAG, "SUCCESS " + message);
-        res.put("message", "SUCCESS " + message);
+        res.put("status", "SUCCESS");
       } else if (resultCode == RavePayActivity.RESULT_ERROR) {
         Log.d(TAG, "ERROR " + message);
-        res.put("message", "ERROR " + message);
+        res.put("status", "ERROR");
       } else if (resultCode == RavePayActivity.RESULT_CANCELLED) {
         Log.d(TAG, "CANCELLED " + message);
-        res.put("message", "CANCELLED " + message);
+        res.put("status", "CANCELLED");
       }
+      res.put("data", message);
       finishWithResult(res);
+      return true;
     }
     return false;
   }
@@ -118,16 +116,37 @@ public class FlutterRavepayPlugin implements MethodCallHandler {
   }
 
   public void chargeCard() {
-    initialize();
-    Log.d(TAG, "ravepayManager");
+    ravepayManager.setAmount((double) chargeParams.get("amount"));
+    ravepayManager.setCountry((String) chargeParams.get("country"));
+    ravepayManager.setCurrency((String) chargeParams.get("currency"));
+    ravepayManager.setEmail((String) chargeParams.get("email"));
 
-    ravepayManager.setAmount(3000.0).setCountry("NG").setCurrency("NGN").setEmail("o.jeremiah@rom-flex.com")
-        // ravepayManager.setAmount(3000.0).setCountry("NG").setCurrency("NGN").setEmail("jeremiahogbomo@gmail.com")
-        .setfName("Jeremiah").setlName("Ogbomo").setNarration("Test Narration")
-        .setPublicKey("FLWPUBK-cd3500135be97b13a29c70e3ee233cbf-X")
-        .setSecretKey("FLWSECK-6257675603889ba57c880eda2a936b46-X").setTxRef("vwexy-123456789")
-        .acceptAccountPayments(false).acceptCardPayments(true).onStagingEnv(true).allowSaveCardFeature(true)
-        // .withTheme(styleId)
-        .initialize();
+    ravepayManager.setfName((String) chargeParams.get("firstname"));
+    ravepayManager.setlName((String) chargeParams.get("lastname"));
+    ravepayManager.setNarration((String) chargeParams.get("narration"));
+
+    ravepayManager.setPublicKey((String) chargeParams.get("publicKey"));
+
+    ravepayManager.setSecretKey((String) chargeParams.get("secretKey"));
+    ravepayManager.setTxRef((String) chargeParams.get("txRef"));
+    ravepayManager.acceptAccountPayments((boolean) chargeParams.get("useAccounts"));
+    ravepayManager.acceptCardPayments((boolean) chargeParams.get("useCards"));
+    ravepayManager.onStagingEnv((boolean) chargeParams.get("isStaging"));
+    ravepayManager.allowSaveCardFeature((boolean) chargeParams.get("useSave"));
+
+    boolean hasTheme = hasStringKey("style");
+    if (hasTheme) {
+      ravepayManager.withTheme((int) chargeParams.get("style"));
+    }
+
+    ravepayManager.initialize();
+  }
+
+  private boolean isEmpty(String s) {
+    return s == null || s.length() < 1;
+  }
+
+  private boolean hasStringKey(String key) {
+    return chargeParams.containsKey(key) && !isEmpty((String) chargeParams.get(key));
   }
 }
