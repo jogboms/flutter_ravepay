@@ -32,7 +32,8 @@ android {
     lintOptions {
         disable 'InvalidPackage'
     }
-    dependencies {
-        implementation 'com.github.Flutterwave:rave-android:1.0.18'
-    }
+}
+
+dependencies {
+    implementation 'com.github.Flutterwave:rave-android:1.0.18'
 }
