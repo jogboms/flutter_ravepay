@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:flutter/services.dart';
 
@@ -15,12 +17,19 @@ class FlutterRavepayResult {
 }
 
 class FlutterRavepay {
-  static const MethodChannel _androidChannel = const MethodChannel('ng.i.handikraft/flutter_ravepay');
-  static const MethodChannel _iosChannel = const MethodChannel('ng.i.handikraft/flutter_ravepay_local');
+  const MethodChannel _androidChannel = const MethodChannel('ng.i.handikraft/flutter_ravepay');
+  const MethodChannel _iosChannel = const MethodChannel('ng.i.handikraft/flutter_ravepay_local');
+  BuildContext context;
 
-  static Future<FlutterRavepayResult> chargeCard(Map<String, dynamic> chargeOptions) async {
-    MethodChannel _channel = TargetPlatform.iOS ? _iosChannel : _androidChannel;
+  FlutterRavepay(this.context);
+
+  Future<FlutterRavepayResult> chargeCard(Map<String, dynamic> chargeOptions) async {
+    MethodChannel _channel = Theme.of(context).platform == TargetPlatform.iOS ? _iosChannel : _androidChannel;
     Map result = await _channel.invokeMethod('chargeCard', chargeOptions);
     return new FlutterRavepayResult(result);
+  }
+
+  static of(BuildContext context) {
+    return new FlutterRavepay(context);
   }
 }
