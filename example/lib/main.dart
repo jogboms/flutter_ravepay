@@ -10,29 +10,30 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+    FlutterRavepay ravePay;
   FlutterRavepayResult _result;
 
   chargeCard() async {
     FlutterRavepayResult result;
 
     try {
-      result = await FlutterRavepay.chargeCard({
-        "amount": 4500.0,
-        "country": "NG",
-        "currency": "NGN",
-        "email": "jeremiahogbomo@gmail.com",
-        "firstname": "Jeremiah",
-        "lastname": "Ogbomo",
-        "narration": "Test Payment",
-        "publicKey": "FLWPUBK-cd3500135be97b13a29c70e3ee233cbf-X",
-        "secretKey": "FLWSECK-6257675603889ba57c880eda2a936b46-X",
-        "txRef": "ravePay-1234345",
-        "useAccounts": false,
-        "useCards": true,
-        "isStaging": true,
-        "useSave": true,
-        "style": null,
-      });
+     result = await ravePay.chargeCard({
+       "amount": "4500.0",
+       "country": "NG",
+       "currency": "NGN",
+       "email": "jeremiahogbomo@gmail.com",
+       "firstname": "Jeremiah",
+       "lastname": "Ogbomo",
+       "narration": "Test Payment",
+       "publicKey": "FLWPUBK-cd3500135be97b13a29c70e3ee233cbf-X",
+       "secretKey": "FLWSECK-6257675603889ba57c880eda2a936b46-X",
+       "txRef": "ravePay-1234345",
+       "useAccounts": false,
+       "useCards": true,
+       "isStaging": true,
+       "useSave": true,
+       "style": null,
+     });
     } on PlatformException {
       result = new FlutterRavepayResult({"message": 'Failed to get platform version.'});
     }
@@ -44,6 +45,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    ravePay = FlutterRavepay.of(context);
+
     return new MaterialApp(
       home: new Scaffold(
         appBar: new AppBar(

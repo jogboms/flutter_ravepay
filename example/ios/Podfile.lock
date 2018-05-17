@@ -1,22 +1,59 @@
 PODS:
+  - Alamofire (4.7.2)
+  - BSErrorMessageView (1.1)
+  - CreditCardValidator (0.4)
   - Flutter (1.0.0)
   - flutter_ravepay (0.0.1):
     - Flutter
+  - IQKeyboardManagerSwift (6.0.3)
+  - KVNProgress (2.3.1)
+  - PopupDialog (0.5.4)
+  - Shimmer (1.0.2)
+  - SwiftValidator (4.0.0)
 
 DEPENDENCIES:
-  - Flutter (from `Pods/.symlinks/flutter/ios`)
-  - flutter_ravepay (from `Pods/.symlinks/plugins/flutter_ravepay/ios`)
+  - Alamofire
+  - BSErrorMessageView (from `https://github.com/BenjaminSarkisyan/BSErrorMessageView.git`)
+  - CreditCardValidator
+  - Flutter (from `.symlinks/flutter/ios`)
+  - flutter_ravepay (from `.symlinks/plugins/flutter_ravepay/ios`)
+  - IQKeyboardManagerSwift
+  - KVNProgress (~> 2.3.1)
+  - PopupDialog
+  - Shimmer
+  - SwiftValidator (from `https://github.com/jpotts18/SwiftValidator.git`, branch `master`)
 
 EXTERNAL SOURCES:
+  BSErrorMessageView:
+    :git: https://github.com/BenjaminSarkisyan/BSErrorMessageView.git
   Flutter:
-    :path: Pods/.symlinks/flutter/ios
+    :path: .symlinks/flutter/ios
   flutter_ravepay:
-    :path: Pods/.symlinks/plugins/flutter_ravepay/ios
+    :path: .symlinks/plugins/flutter_ravepay/ios
+  SwiftValidator:
+    :branch: master
+    :git: https://github.com/jpotts18/SwiftValidator.git
+
+CHECKOUT OPTIONS:
+  BSErrorMessageView:
+    :commit: e1523069939ac597f9b7a9c615d718f89c071b49
+    :git: https://github.com/BenjaminSarkisyan/BSErrorMessageView.git
+  SwiftValidator:
+    :commit: ba27b0e501bf542b5c1a97bed8f706d12fb2d4f4
+    :git: https://github.com/jpotts18/SwiftValidator.git
 
 SPEC CHECKSUMS:
-  Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
-  flutter_ravepay: 1ab22e324f1db44a2d8a8eb27bf10496bb87d531
+  Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
+  BSErrorMessageView: 67cc7d172995fbc6df602c2b8923f48121ddf7a9
+  CreditCardValidator: 9f0814dd61682c004071a250d89327ca83514a48
+  Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
+  flutter_ravepay: f7691aa607578db136bc117013001c4550396c09
+  IQKeyboardManagerSwift: 04e8679f85e496bb2c474eeb9284052f1b3c391c
+  KVNProgress: 8167b1f19e2758290c0b6143020ed9dcbb0477a1
+  PopupDialog: 75cf955693590b0cb2fdde00223fb65d99c57247
+  Shimmer: c5374be1c2b0c9e292fb05b339a513cf291cac86
+  SwiftValidator: 25ded5ca1f10c05adf57f6ac82a72d28ac8d91af
 
-PODFILE CHECKSUM: ea0518673586564c605fb6593d385c0e3708ff8d
+PODFILE CHECKSUM: 5f4df3b93896a11ac8ecd2c29403800bf578d2c7
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.4.0
