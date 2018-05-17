@@ -9,7 +9,11 @@ class FlutterRavepayResult {
   FlutterRavepayResult(this.result);
 
   get status => result['status'];
-  get message => result['message'];
+  get data => result['data'];
+
+  get isSuccess => status == "SUCCESS";
+  get isError => status == "ERROR";
+  get isCancel => status == "CANCELLED";
 
   toMap() {
     return result;
@@ -17,15 +21,17 @@ class FlutterRavepayResult {
 }
 
 class FlutterRavepay {
-  const MethodChannel _androidChannel = const MethodChannel('ng.i.handikraft/flutter_ravepay');
-  const MethodChannel _iosChannel = const MethodChannel('ng.i.handikraft/flutter_ravepay_local');
   BuildContext context;
+  const String _androidChannel = 'ng.i.handikraft/flutter_ravepay';
+  const String _iosChannel = 'ng.i.handikraft/flutter_ravepay_local';
 
   FlutterRavepay(this.context);
 
   Future<FlutterRavepayResult> chargeCard(Map<String, dynamic> chargeOptions) async {
-    MethodChannel _channel = Theme.of(context).platform == TargetPlatform.iOS ? _iosChannel : _androidChannel;
+    String _channelName = Theme.of(context).platform == TargetPlatform.iOS ? _iosChannel : _androidChannel;
+    MethodChannel _channel = new MethodChannel(_channelName);
     Map result = await _channel.invokeMethod('chargeCard', chargeOptions);
+    // print(result);
     return new FlutterRavepayResult(result);
   }
 

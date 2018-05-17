@@ -28,7 +28,6 @@ import Rave
         default:
             _result(FlutterMethodNotImplemented)
         }
-        _result(1)
     }
 
     public func chargeCard(_ call: FlutterMethodCall) {
@@ -69,7 +68,7 @@ import Rave
     }
 
     func ravePaymentManagerDidCancel(_ ravePaymentManager: RavePayManager) {
-        _result(["status": "CANCELED"]);
+        _result(["status": "CANCELLED"]);
     }
 
     func ravePaymentManager(_ ravePaymentManager: RavePayManager, didSucceedPaymentWithResult result: [String : AnyObject]) {
