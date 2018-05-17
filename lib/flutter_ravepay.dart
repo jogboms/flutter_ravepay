@@ -29,7 +29,7 @@ class FlutterRavepay {
 
   Future<FlutterRavepayResult> chargeCard(Map<String, dynamic> chargeOptions) async {
     String _channelName = Theme.of(context).platform == TargetPlatform.iOS ? _iosChannel : _androidChannel;
-    MethodChannel _channel = const MethodChannel(_channelName);
+    MethodChannel _channel = new MethodChannel(_channelName);
     Map result = await _channel.invokeMethod('chargeCard', chargeOptions);
     // print(result);
     return new FlutterRavepayResult(result);
