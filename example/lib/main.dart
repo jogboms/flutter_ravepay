@@ -10,13 +10,14 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+    FlutterRavepay ravePay;
   FlutterRavepayResult _result;
 
   chargeCard() async {
     FlutterRavepayResult result;
 
     try {
-     result = await FlutterRavepay.chargeCard({
+     result = await ravePay.chargeCard({
        "amount": "4500.0",
        "country": "NG",
        "currency": "NGN",
@@ -44,6 +45,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    ravePay = FlutterRavepay.of(context);
+
     return new MaterialApp(
       home: new Scaffold(
         appBar: new AppBar(
