@@ -1,6 +1,6 @@
 # Flutter Ravepay
 
-Flutter_Ravepay provides a wrapper that incorporate payments using [Ravepay](https://rave.flutterwave.com/) within your flutter applications. The integration is achieved using Ravepay's [Android](https://flutterwavedevelopers.readme.io/docs/android)/[iOS](https://flutterwavedevelopers.readme.io/docs/ios) SDK libraries. It currently has full support for only Android. Getting it to work on iOS comes with a few more steps and configurations.
+Flutter_Ravepay provides a wrapper that incorporate payments using [Ravepay](https://rave.flutterwave.com/) within your flutter applications. The integration is achieved using Ravepay's [Android](https://flutterwavedevelopers.readme.io/docs/android)/[iOS](https://flutterwavedevelopers.readme.io/docs/ios) SDK libraries. It currently has full support for only Android. Getting it to work on iOS comes with a few more steps and configurations (soon to come).
 
 <div style="text-align: center">
     <table>
@@ -69,6 +69,12 @@ try {
   result = new FlutterRavepayResult({"message": 'Failed to communicate.'});
 }
 ```
+
+## Bugs/Requests
+
+If you encounter any problems feel free to open an issue. If you feel the library is
+missing a feature, please raise a ticket on Github and I'll look into it.
+Pull request are also welcome.
 
 ## Note
 
