@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
        "style": null,
      });
     } on PlatformException {
-      result = new FlutterRavepayResult({"message": 'Failed to get platform version.'});
+      result = new FlutterRavepayResult({"message": 'Failed to communicate.'});
     }
 
     setState(() {
