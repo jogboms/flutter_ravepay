@@ -10,15 +10,15 @@ import Rave
     override func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?
-    ) -> Bool {
+        ) -> Bool {
         GeneratedPluginRegistrant.register(with: self)
-        let controller = self.window.rootViewController
-        let channel = FlutterMethodChannel(name: RAVEPAY_CHANNEL, binaryMessenger: controller as! FlutterBinaryMessenger);
-
+        
+        let channel = FlutterMethodChannel(name: RAVEPAY_CHANNEL, binaryMessenger: self.binaryMessenger());
+        
         channel.setMethodCallHandler(handle)
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
-
+    
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         print("iOS => call \(call.method)")
         _result = result
@@ -29,7 +29,7 @@ import Rave
             _result(FlutterMethodNotImplemented)
         }
     }
-
+    
     public func chargeCard(_ call: FlutterMethodCall) {
         let config = RavePayConfig.sharedConfig()
         
@@ -40,18 +40,20 @@ import Rave
         let email = options["email"] as! String
         let isStaging = options["isStaging"]
         let narration = options["narration"] as! String
-    //        let useAccounts = options["useAccounts"] as! Bool
-    //        let useCards = options["useCards"] as! Bool
+//        let useAccounts = options["useAccounts"] as! Bool
+//        let useCards = options["useCards"] as! Bool
         let useSave = options["useSave"] as! Bool
         let txRef = options["txRef"] as! String
-    //        let style = options["style"] as! String
+//        let style = options["style"] as! String
         let publicKey = options["publicKey"] as! String
         let secretKey = options["secretKey"] as! String
-
+        
         config.publicKey = publicKey
         config.secretKey = secretKey
         config.isStaging = isStaging != nil ? isStaging as! Bool : true
-
+        config.themeColor = UIColor.init(hex: "B456BF")
+        config.buttonThemeColor = UIColor.init(hex: "FEC545")
+        
         let raveMgr = RavePayManager()
         raveMgr.email = email
         raveMgr.amount = amount
@@ -61,21 +63,22 @@ import Rave
         raveMgr.savedCardsAllow = useSave
         raveMgr.delegate = self
         raveMgr.narration = narration
-        raveMgr.supportedPaymentMethods = [.card]
-    //        raveMgr.supportedPaymentMethods = [.card,.account] // Choose supported payment channel allowed
-
-        raveMgr.show(withController:self.window.rootViewController as! UIViewController)
+       raveMgr.supportedPaymentMethods = [.card]
+        // raveMgr.supportedPaymentMethods = [.card,.account] // Choose supported payment channel allowed
+        
+        raveMgr.show(withController:self.window.rootViewController!)
     }
-
+    
     func ravePaymentManagerDidCancel(_ ravePaymentManager: RavePayManager) {
-        _result(["status": "CANCELLED"]);
+        _result(["status": "CANCELLED", "payload": nil]);
     }
-
+    
     func ravePaymentManager(_ ravePaymentManager: RavePayManager, didSucceedPaymentWithResult result: [String : AnyObject]) {
-        _result(["status": "SUCCESS", "data": result]);
+        _result(["status": "SUCCESS", "payload": result["payload"]]);
     }
-
+    
     func ravePaymentManager(_ ravePaymentManager: RavePayManager, didFailPaymentWithResult result: [String : AnyObject]) {
-        _result(["status": "ERROR", "data": result]);
+        _result(["status": "ERROR", "payload": result["payload"]]);
     }
 }
+
