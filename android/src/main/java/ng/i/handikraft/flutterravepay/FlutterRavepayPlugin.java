@@ -116,7 +116,7 @@ public class FlutterRavepayPlugin implements PluginRegistry.ActivityResultListen
   }
 
   public void chargeCard() {
-    ravepayManager.setAmount((double) chargeParams.get("amount"));
+    ravepayManager.setAmount(Double.parseDouble((String) chargeParams.get("amount")));
     ravepayManager.setCountry((String) chargeParams.get("country"));
     ravepayManager.setCurrency((String) chargeParams.get("currency"));
     ravepayManager.setEmail((String) chargeParams.get("email"));

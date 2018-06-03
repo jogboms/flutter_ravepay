@@ -39,35 +39,30 @@ import 'package:flutter_ravepay/flutter_ravepay.dart';
 ### Instantiate
 
 ```dart
-FlutterRavepay ravePay = FlutterRavepay.of(context);
+Ravepay ravePay = Ravepay.of(context);
 ```
 
 ### Charging a Card
 
 ```dart
-FlutterRavepayResult result;
-
-try {
-  result = await ravePay.chargeCard({
-    "amount": "4500.0",
-    "country": "NG",
-    "currency": "NGN",
-    "email": "testemail@gmail.com",
-    "firstname": "Jeremiah",
-    "lastname": "Ogbomo",
-    "narration": "Test Payment",
-    "publicKey": "****",
-    "secretKey": "****",
-    "txRef": "ravePay-1234345",
-    "useAccounts": false,
-    "useCards": true,
-    "isStaging": true,
-    "useSave": true,
-    "style": null,
-  });
-} on PlatformException {
-  result = new FlutterRavepayResult({"message": 'Failed to communicate.'});
-}
+RavepayResult result = await ravePay.chargeCard(
+    new RavepayConfig(
+        amount: 4500.0,
+        country: "NG",
+        currency: "NGN",
+        email: "testemail@gmail.com",
+        firstname: "Jeremiah",
+        lastname: "Ogbomo",
+        narration: "Test Payment",
+        publicKey: "****",
+        secretKey: "****",
+        txRef: "ravePay-1234345",
+        useAccounts: false,
+        useCards: true,
+        isStaging: true,
+        useSave: true,
+    ),
+);
 ```
 
 ## Bugs/Requests
