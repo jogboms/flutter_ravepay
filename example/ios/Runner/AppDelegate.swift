@@ -40,6 +40,7 @@ import Alamofire
         let currency = options["currency"] as! String
         let email = options["email"] as! String
         let isStaging = options["isStaging"]
+        let meta = options["metadata"] as! [[String: String]]
         let narration = options["narration"] as! String
 //        let useAccounts = options["useAccounts"] as! Bool
 //        let useCards = options["useCards"] as! Bool
@@ -64,6 +65,7 @@ import Alamofire
         raveMgr.savedCardsAllow = useSave
         raveMgr.delegate = self
         raveMgr.narration = narration
+        raveMgr.meta = meta
         raveMgr.supportedPaymentMethods = [.card]
         // raveMgr.supportedPaymentMethods = [.card,.account] // Choose supported payment channel allowed
         
