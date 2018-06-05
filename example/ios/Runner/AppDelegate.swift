@@ -1,6 +1,7 @@
 import UIKit
 import Flutter
 import Rave
+import Alamofire
 
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate, RavePaymentManagerDelegate {
@@ -63,7 +64,7 @@ import Rave
         raveMgr.savedCardsAllow = useSave
         raveMgr.delegate = self
         raveMgr.narration = narration
-       raveMgr.supportedPaymentMethods = [.card]
+        raveMgr.supportedPaymentMethods = [.card]
         // raveMgr.supportedPaymentMethods = [.card,.account] // Choose supported payment channel allowed
         
         raveMgr.show(withController:self.window.rootViewController!)
@@ -74,7 +75,31 @@ import Rave
     }
     
     func ravePaymentManager(_ ravePaymentManager: RavePayManager, didSucceedPaymentWithResult result: [String : AnyObject]) {
-        _result(["status": "SUCCESS", "payload": result["payload"]]);
+        let payload = result["payload"]!;
+        let data = payload["data"] as! [String: AnyObject];
+        let secret = RavePayConfig.sharedConfig().secretKey;
+        let isStaging = RavePayConfig.sharedConfig().isStaging;
+        let url = isStaging ? "https://ravesandboxapi.flutterwave.com" : "https://api.ravepay.co";
+        let  params = ["SECKEY": secret, "flw_ref": data["flwRef"]!] as! [String: String];
+        
+        Alamofire.request(url + "/flwv3-pug/getpaidx/api/verify", method: .post, parameters: params).responseJSON {
+            (res) -> Void in
+            
+            if(res.result.isSuccess){
+                let result = res.result.value as? Dictionary<String,AnyObject>;
+                print(result);
+                if let  status = result?["status"] as? String{
+                    if (status == "success"){
+                        self._result(["status": "SUCCESS", "payload": result!]);
+                    }
+                }
+            } else{
+//                KVNProgress.dismiss()
+//                showMessageDialog("Error", message: "Something went wrong please try again.", image: nil, axis: .horizontal, viewController: self, handler: {
+//                })
+//                errorCallback( res.result.error!.localizedDescription)
+            }
+        }
     }
     
     func ravePaymentManager(_ ravePaymentManager: RavePayManager, didFailPaymentWithResult result: [String : AnyObject]) {
