@@ -7,28 +7,23 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.MethodCall;
 
-// import org.json.JSONArray;
-// import org.json.JSONException;
-// import org.json.JSONObject;
-// import android.util.Patterns;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
-// import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
-// import android.net.Uri;
 
 import com.flutterwave.raveandroid.RavePayManager;
 import com.flutterwave.raveandroid.RavePayActivity;
 import com.flutterwave.raveandroid.RaveConstants;
+import com.flutterwave.raveandroid.Meta;
 
 /**
  * FlutterRavepayPlugin
  */
 public class FlutterRavepayPlugin implements PluginRegistry.ActivityResultListener, MethodCallHandler {
-  // public class FlutterRavepayPlugin implements MethodCallHandler {
   public static final String TAG = "FlutterRavepayPlugin";
   private static final String CHANNEL_NAME = "ng.i.handikraft/flutter_ravepay";
   private static final String METHOD_CHARGE_CARD = "chargeCard";
@@ -99,7 +94,7 @@ public class FlutterRavepayPlugin implements PluginRegistry.ActivityResultListen
         Log.d(TAG, "CANCELLED " + message);
         res.put("status", "CANCELLED");
       }
-      res.put("data", message);
+      res.put("payload", message);
       finishWithResult(res);
       return true;
     }
@@ -129,6 +124,14 @@ public class FlutterRavepayPlugin implements PluginRegistry.ActivityResultListen
 
     ravepayManager.setSecretKey((String) chargeParams.get("secretKey"));
     ravepayManager.setTxRef((String) chargeParams.get("txRef"));
+
+    List<Meta> metaList = new ArrayList<Meta>();
+    for(Map meta: (List<Map>) chargeParams.get("metadata")){
+      metaList.add(new Meta((String) meta.get("metaname"), (String) meta.get("metavalue")));
+    }
+
+    ravepayManager.setMeta(metaList);
+    // ravepayManager.setMeta((List<Meta>) (List) chargeParams.get("metadata"));
     ravepayManager.acceptAccountPayments((boolean) chargeParams.get("useAccounts"));
     ravepayManager.acceptCardPayments((boolean) chargeParams.get("useCards"));
     ravepayManager.onStagingEnv((boolean) chargeParams.get("isStaging"));

@@ -30,6 +30,10 @@ class _MyAppState extends State<MyApp> {
         useCards: true,
         isStaging: true,
         useSave: true,
+        metadata: [
+          RavepayMeta("email", "jeremiahogbomo@gmail.com"),
+          RavepayMeta("id", "1994"),
+        ]
       ),
     );
 
