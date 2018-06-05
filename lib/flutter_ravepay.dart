@@ -5,6 +5,20 @@ import 'package:flutter/foundation.dart';
 
 import 'package:flutter/services.dart';
 
+class RavepayMeta {
+  final String metaname;
+  final String metavalue;
+
+  RavepayMeta(this.metaname, this.metavalue);
+
+  toMap() {
+    return {
+      "metaname": metaname,
+      "metavalue": metavalue,
+    };
+  }
+}
+
 class RavepayConfig {
   final double amount;
   final String country;
@@ -21,6 +35,7 @@ class RavepayConfig {
   final bool isStaging;
   final bool useSave;
   final bool style = null;
+  final List<RavepayMeta> metadata;
 
   RavepayConfig({
     @required this.amount,
@@ -33,6 +48,7 @@ class RavepayConfig {
     @required this.publicKey,
     @required this.secretKey,
     @required this.txRef,
+    this.metadata,
     this.useAccounts = true,
     this.useCards = true,
     this.isStaging = true,
@@ -52,6 +68,7 @@ class RavepayConfig {
       "secretKey": secretKey,
       "txRef": txRef,
       "useAccounts": useAccounts,
+      "metadata": metadata != null ? metadata.map((meta) => meta.toMap()).toList() : [],
       "useCards": useCards,
       "isStaging": isStaging,
       "useSave": useSave,
