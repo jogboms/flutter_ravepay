@@ -90,7 +90,7 @@ class RavepayResult {
   final Map __result;
 
   RavepayResult(this.__result) {
-    if (!isCancel) {
+    if (!isCancel && __result['payload'] != null) {
       __status = __result['payload']['status'];
       __message = __result['payload']['message'];
       final Map data = __result['payload']['data'];
