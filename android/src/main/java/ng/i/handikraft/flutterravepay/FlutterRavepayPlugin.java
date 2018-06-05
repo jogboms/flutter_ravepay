@@ -99,7 +99,7 @@ public class FlutterRavepayPlugin implements PluginRegistry.ActivityResultListen
         Log.d(TAG, "CANCELLED " + message);
         res.put("status", "CANCELLED");
       }
-      res.put("data", message);
+      res.put("payload", message);
       finishWithResult(res);
       return true;
     }
