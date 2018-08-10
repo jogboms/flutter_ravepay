@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class RavepayMeta {
@@ -68,7 +68,8 @@ class RavepayConfig {
       "secretKey": secretKey,
       "txRef": txRef,
       "useAccounts": useAccounts,
-      "metadata": metadata != null ? metadata.map((meta) => meta.toMap()).toList() : [],
+      "metadata":
+          metadata != null ? metadata.map((meta) => meta.toMap()).toList() : [],
       "useCards": useCards,
       "isStaging": isStaging,
       "useSave": useSave,
@@ -191,8 +192,8 @@ class RavepayResult {
 
 class Ravepay {
   BuildContext context;
-  const String _androidChannel = 'ng.i.handikraft/flutter_ravepay';
-  const String _iosChannel = 'ng.i.handikraft/flutter_ravepay_local';
+  final String _androidChannel = 'ng.i.handikraft/flutter_ravepay';
+  final String _iosChannel = 'ng.i.handikraft/flutter_ravepay_local';
 
   Ravepay(this.context);
 
@@ -209,7 +210,9 @@ class Ravepay {
     }
     return new RavepayResult(
       result["status"],
-      result["payload"] != null ? (isIos ? result["payload"] : json.decode(result["payload"])) : null,
+      result["payload"] != null
+          ? (isIos ? result["payload"] : json.decode(result["payload"]))
+          : null,
     );
   }
 

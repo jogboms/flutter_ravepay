@@ -13,8 +13,8 @@ import Alamofire
         didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?
         ) -> Bool {
         GeneratedPluginRegistrant.register(with: self)
-        
-        let channel = FlutterMethodChannel(name: RAVEPAY_CHANNEL, binaryMessenger: self.binaryMessenger());
+        let controller = self.window.rootViewController
+        let channel = FlutterMethodChannel(name: RAVEPAY_CHANNEL, binaryMessenger: controller as! FlutterBinaryMessenger);
         
         channel.setMethodCallHandler(handle)
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
