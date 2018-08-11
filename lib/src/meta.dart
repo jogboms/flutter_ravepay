@@ -1,6 +1,3 @@
-import 'package:meta/meta.dart';
-
-@immutable
 class RavepayMeta {
   final String metaname;
   final String metavalue;

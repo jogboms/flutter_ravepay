@@ -1,7 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_ravepay/src/meta.dart';
-import 'package:meta/meta.dart';
 
-@immutable
 class RavepayConfig {
   final double amount;
   final String country;

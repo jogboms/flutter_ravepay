@@ -1,6 +1,3 @@
-import 'package:meta/meta.dart';
-
-@immutable
 class RavepayCard {
   final String expirymonth;
   final String expiryyear;
