@@ -1,6 +1,7 @@
 import 'package:flutter_ravepay/src/meta.dart';
 import 'package:meta/meta.dart';
 
+@immutable
 class RavepayConfig {
   final double amount;
   final String country;
@@ -16,10 +17,10 @@ class RavepayConfig {
   final bool useCards;
   final bool isStaging;
   final bool useSave;
-  final bool style = null;
+  final bool style;
   final List<RavepayMeta> metadata;
 
-  RavepayConfig({
+  const RavepayConfig({
     @required this.amount,
     @required this.country,
     @required this.currency,
@@ -35,6 +36,7 @@ class RavepayConfig {
     this.useCards = true,
     this.isStaging = true,
     this.useSave = true,
+    this.style,
   });
 
   Map<String, dynamic> toMap() {
@@ -56,7 +58,7 @@ class RavepayConfig {
       "useCards": useCards,
       "isStaging": isStaging,
       "useSave": useSave,
-      "style": style,
+      "style": null,
     };
   }
 }

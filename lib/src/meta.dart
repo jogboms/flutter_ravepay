@@ -1,8 +1,14 @@
+import 'package:meta/meta.dart';
+
+@immutable
 class RavepayMeta {
   final String metaname;
   final String metavalue;
 
-  RavepayMeta(this.metaname, this.metavalue);
+  const RavepayMeta(
+    this.metaname,
+    this.metavalue,
+  );
 
   Map<String, String> toMap() {
     return <String, String>{

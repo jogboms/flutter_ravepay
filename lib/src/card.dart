@@ -1,13 +1,16 @@
-class RavepayCard {
-  String expirymonth;
-  String expiryyear;
-  String cardBIN;
-  String last4digits;
-  String brand;
-  List<Map<dynamic, dynamic>> cardTokens;
-  String lifeTimeToken;
+import 'package:meta/meta.dart';
 
-  RavepayCard({
+@immutable
+class RavepayCard {
+  final String expirymonth;
+  final String expiryyear;
+  final String cardBIN;
+  final String last4digits;
+  final String brand;
+  final List<Map<String, dynamic>> cardTokens;
+  final String lifeTimeToken;
+
+  const RavepayCard({
     this.expirymonth,
     this.expiryyear,
     this.cardBIN,
@@ -42,7 +45,7 @@ class RavepayCard {
   }
 }
 
-List<Map<dynamic, dynamic>> _parseTokenList(List<dynamic> tokens) {
+List<Map<String, dynamic>> _parseTokenList(List<dynamic> tokens) {
   if (tokens == null) {
     return [];
   }

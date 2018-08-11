@@ -14,7 +14,7 @@ class _MyAppState extends State<MyApp> {
 
   void chargeCard() async {
     final RavepayResult result = await ravePay.chargeCard(
-      new RavepayConfig(
+      const RavepayConfig(
         amount: 4500.0,
         country: "NG",
         currency: "NGN",
@@ -30,8 +30,8 @@ class _MyAppState extends State<MyApp> {
         isStaging: true,
         useSave: true,
         metadata: [
-          RavepayMeta("email", "jeremiahogbomo@gmail.com"),
-          RavepayMeta("id", "1994"),
+          const RavepayMeta("email", "jeremiahogbomo@gmail.com"),
+          const RavepayMeta("id", "1994"),
         ],
       ),
     );
