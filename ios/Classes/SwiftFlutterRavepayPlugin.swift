@@ -3,7 +3,7 @@ import UIKit
 
 public class SwiftFlutterRavepayPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
-    let channel = FlutterMethodChannel(name: "ng.i.handikraft/flutter_ravepay", binaryMessenger: registrar.messenger())
+    let channel = FlutterMethodChannel(name: "ng.i.handikraft/null", binaryMessenger: registrar.messenger())
     let instance = SwiftFlutterRavepayPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
   }

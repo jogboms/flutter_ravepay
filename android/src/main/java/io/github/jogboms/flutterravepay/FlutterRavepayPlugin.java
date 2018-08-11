@@ -1,4 +1,4 @@
-package ng.i.handikraft.flutterravepay;
+package io.github.jogboms.flutterravepay;
 
 import io.flutter.plugin.common.PluginRegistry;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
