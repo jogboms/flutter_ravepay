@@ -1,5 +1,7 @@
 # Flutter Ravepay
 
+[![pub package](https://img.shields.io/pub/v/flutter_ravepay.svg)](https://pub.dartlang.org/packages/flutter_ravepay)
+
 Flutter_Ravepay provides a wrapper that incorporate payments using [Ravepay](https://rave.flutterwave.com/) within your flutter applications. The integration is achieved using Ravepay's [Android](https://flutterwavedevelopers.readme.io/docs/android)/[iOS](https://flutterwavedevelopers.readme.io/docs/ios) SDK libraries. It currently has full support for only Android. Getting it to work on iOS comes with a few more steps and configurations (soon to come).
 
 <div style="text-align: center">
@@ -21,14 +23,8 @@ Flutter_Ravepay provides a wrapper that incorporate payments using [Ravepay](htt
 
 ```yaml
 dependencies:
-  flutter_ravepay:
-      git:
-        url: git://github.com/jogboms/flutter_ravepay
+  flutter_ravepay: "^0.2.0"
 ```
-
-## How To Use
-
-More info soon, but, so far.
 
 ### Import
 
@@ -46,7 +42,7 @@ Ravepay ravePay = Ravepay.of(context);
 
 ```dart
 RavepayResult result = await ravePay.chargeCard(
-    new RavepayConfig(
+    const RavepayConfig(
         amount: 4500.0,
         country: "NG",
         currency: "NGN",
@@ -62,8 +58,8 @@ RavepayResult result = await ravePay.chargeCard(
         isStaging: true,
         useSave: true,
         metadata: [
-          RavepayMeta("email", "jeremiahogbomo@gmail.com"),
-          RavepayMeta("id", "1994"),
+          const RavepayMeta("email", "jeremiahogbomo@gmail.com"),
+          const RavepayMeta("id", "1994"),
         ]
     ),
 );
@@ -84,4 +80,4 @@ For help on editing plugin code, view the [documentation](https://flutter.io/pla
 
 ## License
 
-Apache License Version 2.0, January 2004
+MIT License
