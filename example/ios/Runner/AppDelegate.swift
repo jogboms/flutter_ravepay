@@ -80,16 +80,16 @@ import Alamofire
         let payload = result["payload"]!;
         let data = payload["data"] as! [String: AnyObject];
         let secret = RavePayConfig.sharedConfig().secretKey;
+        let flwRef = data["flw_ref"]!;
         let isStaging = RavePayConfig.sharedConfig().isStaging;
         let url = isStaging ? "https://ravesandboxapi.flutterwave.com" : "https://api.ravepay.co";
-        let  params = ["SECKEY": secret, "flw_ref": data["flwRef"]!] as! [String: String];
+        let  params = ["SECKEY": secret as Any, "flw_ref": flwRef] as! [String: String];
         
         Alamofire.request(url + "/flwv3-pug/getpaidx/api/verify", method: .post, parameters: params).responseJSON {
             (res) -> Void in
             
             if(res.result.isSuccess){
                 let result = res.result.value as? Dictionary<String,AnyObject>;
-                print(result);
                 if let  status = result?["status"] as? String{
                     if (status == "success"){
                         self._result(["status": "SUCCESS", "payload": result!]);
@@ -105,7 +105,7 @@ import Alamofire
     }
     
     func ravePaymentManager(_ ravePaymentManager: RavePayManager, didFailPaymentWithResult result: [String : AnyObject]) {
-        _result(["status": "ERROR", "payload": result["payload"]]);
+        _result(["status": "ERROR", "payload": result["payload"]!]);
     }
 }
 
