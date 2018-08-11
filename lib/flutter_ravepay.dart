@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_ravepay/src/config.dart';
 import 'package:flutter_ravepay/src/result.dart';
 
+export 'src/card.dart';
 export 'src/config.dart';
 export 'src/meta.dart';
 export 'src/result.dart';

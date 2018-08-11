@@ -1,6 +1,6 @@
 name: flutter_ravepay
 description: Flutter integration for Flutterwave's Rave payment platform.
-version: 0.2.0
+version: 0.2.1
 author: Jeremiah Ogbomo <jeremiahogbomo@gmail.com>
 homepage: https://github.com/jogboms/flutter_ravepay
 
