@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_ravepay/flutter_ravepay.dart';
 
 void main() => runApp(new MyApp());
@@ -13,8 +12,8 @@ class _MyAppState extends State<MyApp> {
   Ravepay ravePay;
   RavepayResult _result;
 
-  chargeCard() async {
-    RavepayResult result = await ravePay.chargeCard(
+  void chargeCard() async {
+    final RavepayResult result = await ravePay.chargeCard(
       new RavepayConfig(
         amount: 4500.0,
         country: "NG",
@@ -33,7 +32,7 @@ class _MyAppState extends State<MyApp> {
         metadata: [
           RavepayMeta("email", "jeremiahogbomo@gmail.com"),
           RavepayMeta("id", "1994"),
-        ]
+        ],
       ),
     );
 
@@ -52,19 +51,21 @@ class _MyAppState extends State<MyApp> {
           title: new Text('Flutter Ravepay'),
         ),
         body: new Center(
-          child: new Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              new RaisedButton(
-                color: Colors.green,
-                onPressed: () => chargeCard(),
-                child: new Text("TEST"),
-              ),
-              SizedBox(
-                height: 16.0,
-              ),
-              new Text('Working?: ${_result?.toMap()}\n'),
-            ],
+          child: SingleChildScrollView(
+            child: new Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                new RaisedButton(
+                  color: Colors.green,
+                  onPressed: () => chargeCard(),
+                  child: new Text("TEST"),
+                ),
+                SizedBox(
+                  height: 16.0,
+                ),
+                new Text('Working?: ${_result?.toMap()}\n'),
+              ],
+            ),
           ),
         ),
       ),

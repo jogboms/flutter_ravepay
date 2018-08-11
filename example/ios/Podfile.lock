@@ -1,0 +1,72 @@
+PODS:
+  - Alamofire (4.7.2)
+  - BSErrorMessageView (1.1)
+  - CreditCardValidator (0.4)
+  - DynamicBlurView (2.0.2)
+  - Flutter (1.0.0)
+  - flutter_ravepay (0.0.1):
+    - Flutter
+  - IQKeyboardManagerSwift (6.0.3)
+  - KVNProgress (2.3.1)
+  - PopupDialog (0.7.1):
+    - DynamicBlurView (~> 2.0)
+  - Shimmer (1.0.2)
+  - SwiftValidator (4.0.0)
+
+DEPENDENCIES:
+  - Alamofire
+  - BSErrorMessageView (from `https://github.com/BenjaminSarkisyan/BSErrorMessageView.git`)
+  - CreditCardValidator
+  - Flutter (from `.symlinks/flutter/ios`)
+  - flutter_ravepay (from `.symlinks/plugins/flutter_ravepay/ios`)
+  - IQKeyboardManagerSwift
+  - KVNProgress (~> 2.3.1)
+  - PopupDialog
+  - Shimmer
+  - SwiftValidator (from `https://github.com/jpotts18/SwiftValidator.git`, branch `master`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - CreditCardValidator
+    - DynamicBlurView
+    - IQKeyboardManagerSwift
+    - KVNProgress
+    - PopupDialog
+    - Shimmer
+
+EXTERNAL SOURCES:
+  BSErrorMessageView:
+    :git: https://github.com/BenjaminSarkisyan/BSErrorMessageView.git
+  Flutter:
+    :path: ".symlinks/flutter/ios"
+  flutter_ravepay:
+    :path: ".symlinks/plugins/flutter_ravepay/ios"
+  SwiftValidator:
+    :branch: master
+    :git: https://github.com/jpotts18/SwiftValidator.git
+
+CHECKOUT OPTIONS:
+  BSErrorMessageView:
+    :commit: e1523069939ac597f9b7a9c615d718f89c071b49
+    :git: https://github.com/BenjaminSarkisyan/BSErrorMessageView.git
+  SwiftValidator:
+    :commit: ba27b0e501bf542b5c1a97bed8f706d12fb2d4f4
+    :git: https://github.com/jpotts18/SwiftValidator.git
+
+SPEC CHECKSUMS:
+  Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
+  BSErrorMessageView: 67cc7d172995fbc6df602c2b8923f48121ddf7a9
+  CreditCardValidator: 9f0814dd61682c004071a250d89327ca83514a48
+  DynamicBlurView: aa6db4defc6e537eb86fc5e58dd3991666178399
+  Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
+  flutter_ravepay: f7691aa607578db136bc117013001c4550396c09
+  IQKeyboardManagerSwift: 04e8679f85e496bb2c474eeb9284052f1b3c391c
+  KVNProgress: 8167b1f19e2758290c0b6143020ed9dcbb0477a1
+  PopupDialog: 39598b7d41719f5c025b4b70e62728bae7734fef
+  Shimmer: c5374be1c2b0c9e292fb05b339a513cf291cac86
+  SwiftValidator: 25ded5ca1f10c05adf57f6ac82a72d28ac8d91af
+
+PODFILE CHECKSUM: 5f4df3b93896a11ac8ecd2c29403800bf578d2c7
+
+COCOAPODS: 1.5.3

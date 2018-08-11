@@ -6,7 +6,7 @@ import Alamofire
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate, RavePaymentManagerDelegate {
     var _result: FlutterResult!
-    var RAVEPAY_CHANNEL = "ng.i.handikraft/flutter_ravepay_local"
+    var RAVEPAY_CHANNEL = "ng.i.handikraft/flutter_ravepay"
     
     override func application(
         _ application: UIApplication,
